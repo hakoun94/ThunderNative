@@ -18,11 +18,17 @@ class ContactsScreen extends Component {
 
   componentDidUpdate = (prevProps,prevState) => {
     let reload ;
+    /*
+      when new item is added or an exising one is updated
+      the contactForm screen will send reload key to this screen to notify it to
+      reqeust data again in order to get the updated version
+    */
     if (this.props.navigation.state.params) {
       reload = this.props.navigation.state.params.reload ;
     }
 
     if (reload && prevState.data) { this.setState({data : null })}
+ 
     if (prevState.data && !this.state.data) {
       getRequest('contacts').then(resp => {
         this.setState({data : resp.data}) ;

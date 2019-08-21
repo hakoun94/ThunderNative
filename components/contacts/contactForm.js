@@ -1,6 +1,6 @@
 import React , { Component } from 'react' ;
 import { View, Text , TextInput , StyleSheet,Button } from 'react-native' ;
-import { request } from '../../funcs/http' ;
+import { request,deleteRequest } from '../../funcs/http' ;
 
 class ContactForm extends Component {
 
@@ -32,6 +32,17 @@ class ContactForm extends Component {
   }
 
 
+  // when use clicks delete button
+  delete = () => {
+    const { item } = this.props.navigation.state.params  ;
+    this.setState({...this.state,submitButtonDisabled : true })
+    deleteRequest(`contacts/${item.id}`).then(resp => {
+      this.props.navigation.navigate('contacts',{reload : 'true'})
+    })
+
+  }
+
+  // when use clicks submit button
   submit = () => {
     const isValid = this.validate() ;
     if (isValid) {
@@ -41,7 +52,6 @@ class ContactForm extends Component {
       const url  = method === 'PUT' ? `contacts/${item.id}` : 'contacts' ;
 
       request(url,{...this.state},method).then(resp => {
-        this.setState({...this.state, submitButtonDisabled : false,showValidationError : false })
         this.props.navigation.navigate('contacts',{reload : 'true'}) ;
 
       }).catch(e => alert(e.message))
@@ -65,6 +75,15 @@ class ContactForm extends Component {
 
     return (
       <View style = {styles.container}>
+
+        {
+          this.props.navigation.state.params &&
+          <Button
+            title = 'delete'
+            onPress = {this.delete}
+            disabled = {this.state.submitButtonDisabled}
+          />
+        }
 
         <View style = {styles.card}>
 
@@ -140,7 +159,6 @@ const styles = StyleSheet.create({
   card : {
     backgroundColor : "#fff" ,
     flex : 1 ,
-    marginTop : 30  ,
   },
   inputItem : {
     width : '95%' ,
