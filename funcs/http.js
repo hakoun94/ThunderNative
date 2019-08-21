@@ -1,16 +1,16 @@
-import configs from '../configs' ; 
 import axios from 'axios' ;
+import Constants from "expo-constants";
 
+const { manifest } = Constants;
+const baseUrl  = `http://${manifest.debuggerHost.split(':').shift()}:5000/api`;
 
 const getRequest = (url) => {
-  const { baseUrl } = this.props ;
   const dest = baseUrl + '/' + url ;
-  return axios.get(url) ;
+  return axios.get(dest) ;
 }
 
 /* for bpth post , put requests */
 const request = (url,payload,method = 'POST') => {
-  const { baseUrl } = this.props ;
   const dest = baseUrl + '/' + url ;
   return axios({
     method ,
@@ -20,10 +20,10 @@ const request = (url,payload,method = 'POST') => {
 }
 
 const deleteRequest = (url) => {
-  const { baseUrl } = this.props ;
+
   const dest = baseUrl + '/' + url ;
   return axios({
-    'DELETE' ,
+    method : 'DELETE' ,
     url : dest ,
   })
 }

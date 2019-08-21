@@ -1,5 +1,5 @@
-const configs = {
-  baseUrl : "127.0.0.1:5000/api" ,
-}
-
-export default conifg ; 
+// const configs = {
+//   baseUrl : "http://192.168.100.235:5000/api" ,
+// }
+//
+// export default configs ;
