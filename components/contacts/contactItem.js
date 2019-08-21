@@ -10,12 +10,12 @@ const ContactItem = ({item,navigation}) => {
         <View style = {styles.firstColumn}>
 
           <Text style = {styles.name}>{item.firstname}</Text>
-          <Text style = {styles.email}>{item.email ? item.email : 'hakoun.h.94@gmail.com'}</Text>
+          <Text style = {styles.email}>{item.email}</Text>
 
         </View>
 
         <View style = {styles.secondColumn}>
-
+          <TouchableOpacity style = {styles.block} onPress = {() => navigation.navigate('contactForm',{item})}/>
         </View>
       </View>
     </TouchableOpacity>
@@ -50,6 +50,12 @@ const styles = StyleSheet.create({
       color : "#c1c8d4",
       padding: 2,
     },
+    block : {
+      height : 30 ,
+      width : 30  ,
+      borderRadius : 15 ,
+      backgroundColor : "#444" ,
+    }
 
   })
 

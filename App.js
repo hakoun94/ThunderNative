@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { StyleSheet, Text, View,ScrollView,StatusBar,Platform } from 'react-native';
-import { ContactsScreen,ContactDetailsScreen } from './screens' ;
+import { ContactsScreen,ContactDetailsScreen,ContactFormScreen } from './screens' ;
 import { createStackNavigator,createAppContainer } from 'react-navigation';
 
 // prevent view from overlapping with device status bar
@@ -24,16 +24,30 @@ const AppNavigator = createAppContainer(createStackNavigator({
 			headerTintColor: '#fff'
 		}
   } ,
+
+  contactForm  : {
+    screen : ContactFormScreen,
+    navigationOptions: {
+			title: 'Contact Form',
+			headerStyle: { backgroundColor: '#eb4034' },
+			headerTintColor: '#fff'
+		}
+  } ,
+
 })) ;
 
 
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <AppNavigator />
-    </View>
-  );
+export default class App extends Component {
+
+  render = () => {
+    return (
+      <View style={styles.container}>
+        <AppNavigator />
+      </View>
+    );
+  }
+
 }
 
 const styles = StyleSheet.create({

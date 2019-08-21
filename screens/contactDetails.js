@@ -4,13 +4,9 @@ import { View, Text,StyleSheet,ScrollView } from 'react-native' ;
 
 class ContactDetailsScreen extends Component {
 
-  componentDidMount = () => {
-    const {item} = this.props.navigation.state.params ;
-    this.setState({username : item.firstname + ' ' + item.lastname })
-  }
 
   render = () => {
-
+    // item passed with navigation
     const {item} = this.props.navigation.state.params ;
 
     return (
